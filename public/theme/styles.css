@@ -249,6 +249,20 @@ em {
   }
 }
 
+/* # Events page */
+
+.event-illustration-image {
+  display: block;
+  margin: 10px auto;
+  max-height: 384px;
+  max-width: 100%;
+}
+
+.event-content img {
+  height: auto !important;
+  max-width: 100%;
+}
+
 .powered-by {
   font-size: 0.8em;
 }
