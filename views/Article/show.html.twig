@@ -126,6 +126,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
           {% endfor %}
         </div>
       </div>
+    {% else %}
+      <div class="article__used-copy-list" id="occasion">
+        <h2>Exemplaires d'occasion</h2>
+        <p>
+          Aucun exemplaire d'occasion disponible pour le moment.
+        </p>
+        <p>
+          {% include "AppBundle:Article:_alertButton.html.twig" %}
+        </p>
+      </div>
     {% endif %}
 
     {% if similarArticles %}
