@@ -24,6 +24,10 @@ em {
   margin-bottom: 16px;
 }
 
+.wish-button {
+  margin-left: 4px;
+}
+
 @media(min-width: 768px) {
   .article {
     display: flex;
