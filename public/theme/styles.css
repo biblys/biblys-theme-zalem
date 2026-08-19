@@ -108,6 +108,7 @@ em {
 }
 
 .article-in-list {
+  align-items: flex-start;
   border-top: 1px solid var(--grey-15);
   display: flex;
   font-size: 0.9rem;
@@ -122,6 +123,7 @@ em {
 .article-in-list__cover-image {
   display: block;
   margin: 0 auto;
+  max-height: 96px;
   max-width: 100%;
 }
 
@@ -160,6 +162,10 @@ em {
 @media(min-width: 768px) {
   .article-in-list__cover {
     width: 128px;
+  }
+
+  .article-in-list__cover-image {
+    max-height: 128px;
   }
 
   .article-in-list__infos-and-items {
