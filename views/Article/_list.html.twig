@@ -66,13 +66,14 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 				<div class="article-in-list__available-items">
 					{% set newItem = article.getCheapestAvailableItem('new') %}
 					{% if newItem %}
-						<p class="article-in-list__available-new-item">
+						<div class="article-in-list__available-new-item">
 							<span class="fa-solid fa-square green"></span>
 							<strong>Neuf</strong>
 							{{ newItem.selling_price|currency(true)|raw }}
-							<br />
-							{% include "AppBundle:Article:_cartButton.html.twig" with { "text": "Ajouter au panier" } %}
-						</p>
+							<div class="mt-1">
+								{% include "AppBundle:Article:_cartButton.html.twig" with { "label": "Ajouter" } %}
+							</div>
+						</div>
 					{% endif %}
 
 					{% set usedItem = article.getCheapestAvailableItem('used') %}

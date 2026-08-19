@@ -73,14 +73,18 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
       </div>
 
       {% if article.getCheapestAvailableItem('new') %}
-        <p>
-          <span class="fa-solid fa-square led-green"></span>
+        <div class="d-flex align-items-center mb-3">
+          <span class="fa-solid fa-square led-green mr-2"></span>
           {% if article.has('price') %}
             {{ article.price|currency(true)|raw }}
           {% endif %}
-          {% include "AppBundle:Article:_cartButton.html.twig" %}
-          {% include "AppBundle:Article:_wishButton.html.twig" %}
-        </p>
+          <div class="ml-2">
+            {% include "AppBundle:Article:_cartButton.html.twig" %}
+          </div>
+          <div class="ml-2">
+            {% include "AppBundle:Article:_wishButton.html.twig" %}
+          </div>
+        </div>
       {% endif %}
 
       {% if article.has('ean') %}
