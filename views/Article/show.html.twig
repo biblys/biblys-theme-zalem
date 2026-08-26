@@ -87,6 +87,16 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
         </div>
       {% endif %}
 
+
+      {% set bundles = article.model.bundles %}
+      {% if bundles|length %}
+        <p class="article__bundles">
+          Cet article fait partie {{ bundles|length > 1 ? "des lots" : "du lot" }}
+          {% for bundle in bundles %}
+            <a href="{{ path('article_show', { slug: bundle.url }) }}">{{ bundle.title }}</a>{% if not loop.last %}, {% endif %}
+          {% endfor %}
+        </p>
+      {% endif %}
       {% if article.has('ean') %}
         <p>
           EAN : {{ article.ean }}<br>
@@ -100,6 +110,26 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
         </div>
       {% endif %}
     </div>
+
+    {% set bundledArticles = article.model.articlesFromBundle %}
+    {% if bundledArticles|length %}
+      <div class="article__bundled-articles">
+        <h2>Ce lot contient</h2>
+        <ul class="article__bundled-articles__list">
+          {% for bundledArticle in bundledArticles %}
+            <li class="article__bundled-article">
+              <a href="{{ path('article_show', { slug: bundledArticle.url }) }}">{{ bundledArticle.title }}</a>
+              {% set authors = bundledArticle.authors|split(", ") %}
+              {% if authors|length %}
+                <span class="article__bundled-article__authors">
+                  {{ authors|slice(0, 3)|join(", ") }}{% if authors|length > 3 %}…{% endif %}
+                </span>
+              {% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
 
     {% set usedItems = article.getAvailableItems('used') %}
     {% if usedItems %}
