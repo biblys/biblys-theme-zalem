@@ -111,36 +111,76 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
     {% block main %}{% endblock %}
   </main>
-  <footer class="site-footer mt-4 d-md-flex justify-content-between">
-    <div class="footer-block footer-links mb-4">
-      <div class="text-center text-md-left mb-2">
-        <a href="{{ path('feed_index') }}" target="_blank">
-          <span aria-label="Flux RSS" class="fa-solid fa-rss-square fa-2x"></span>
-        </a>
-      </div>
+</div>
 
-      <ul class="text-center text-md-left">
+<footer class="site-footer">
+  <div class="container-lg site-footer__columns">
+    <section class="site-footer__column site-footer__identity">
+      <img class="site-footer__logo" src="/theme/logo.png" alt="{{ app.currentSite.site.title }}">
+      <address class="site-footer__address">
+        8 rue Riesener<br>
+        75012 Paris
+      </address>
+      <p class="site-footer__transports">
+        Métro Montgallet (ligne 8)<br>
+        Bus — arrêts Montgallet et Mairie du 12<sup>e</sup>
+      </p>
+    </section>
+
+    <section class="site-footer__column">
+      <h2 class="site-footer__title">Horaires</h2>
+      <dl class="site-footer__opening-hours">
+        {% for day in [
+          { name: "Lundi", hours: "10h30 – 19h30" },
+          { name: "Mardi", hours: null },
+          { name: "Mercredi", hours: "10h30 – 19h30" },
+          { name: "Jeudi", hours: null },
+          { name: "Vendredi", hours: "10h30 – 19h30" },
+          { name: "Samedi", hours: "10h30 – 19h30" },
+          { name: "Dimanche", hours: null }
+        ] %}
+          <div class="site-footer__day {{ day.hours is null ? "site-footer__day--closed" }}">
+            <dt>{{ day.name }}</dt>
+            <dd>{{ day.hours ?? "fermé" }}</dd>
+          </div>
+        {% endfor %}
+      </dl>
+    </section>
+
+    <section class="site-footer__column">
+      <h2 class="site-footer__title">La librairie</h2>
+      <ul class="site-footer__links">
         <li><a href="/page/a-propos">À propos</a></li>
+        <li><a href="/evenements/">Évènements</a></li>
+        <li><a href="/blog/zalem-a-la-folie/">Zalem à la folie</a></li>
+        <li><a href="/contact/">Contact</a></li>
         <li><a href="/page/mentions-legales">Mentions légales</a></li>
         <li><a href="/page/conditions-generales-de-vente">Conditions générales de vente</a></li>
+        <li>
+          <a href="{{ path('feed_index') }}" target="_blank">
+            Flux RSS
+            <span aria-hidden="true" class="fa fa-rss-square"></span>
+          </a>
+        </li>
       </ul>
-    </div>
-    <div class="footer-block footer-newsletter">
-      <p>Recevoir notre newsletter :</p>
-      <form class="center" method="post" action="/mailing/subscribe">
+    </section>
+
+    <section class="site-footer__column">
+      <h2 class="site-footer__title">Newsletter</h2>
+      <form class="site-footer__newsletter" method="post" action="/mailing/subscribe">
         <fieldset>
           <input type="email" name="email" placeholder="Votre adresse e-mail" class="form-control"
                  aria-label="Votre adresse e-mail">
           <input class="btn btn-info btn-sm btn-block" type="submit" value="S’abonner">
         </fieldset>
       </form>
-    </div>
-  </footer>
+    </section>
+  </div>
 
-  <p class="powered-by text-center my-5">
+  <p class="powered-by">
     propulsé par <a href="https://biblys.org">biblys</a> · logiciel libre
   </p>
-</div>
+</footer>
 {% include "layout:_assets_js.html.twig" %}
 </body>
 </html>
